@@ -1,0 +1,16 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Cancer Predictions",
+    "section": "",
+    "text": "Introduction:\n\nCancer is the 2nd leading cause of death in the US. In a world where approxiamately 10 million people die each year from cancer, it is important to understand what factors cause it to more likely.\n\n\nIn this project I used a dataset containing medical and lifestyle information for 1500 patients, designed to predict the presence of cancer based on various features."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this site"
+  }
+]
