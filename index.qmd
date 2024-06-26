@@ -1,0 +1,72 @@
+---
+title: "Cancer Predictions"
+author: "Pragnyasri Sankar"
+format: html
+editor: visual
+execute: 
+  echo: FALSE
+---
+
+```{r}
+# Install and load required packages
+#| label: setup
+#| message: FALSE
+#| warning: FALSE
+library(tidyverse)
+library(GGally)
+```
+
+```{r}
+x <- read_csv(file = "The_Cancer_data_1500_V2.csv", show_col_types = FALSE)
+
+x$Diagnosis <- factor(x$Diagnosis, levels = c(1, 2), labels = c("No Cancer", "Cancer"))
+
+# Define variables of interest
+vars_of_interest <- c("Age", "GeneticRisk", "Gender")
+
+
+```
+
+```{r}
+# Loop through each variable and create comparison plots
+for (var in vars_of_interest) {
+  
+  # Create plot
+ p <- ggplot(x, aes_string(x = var, fill = "Diagnosis")) +
+    geom_bar(position = "fill", color = "black", width = 0.6) +
+    labs(title = paste("Comparison of", var, "vs. Diagnosis"),
+         x = var, y = "Proportion of Cancer") +
+    scale_fill_manual(values = c("No Cancer" = "blue", "Cancer" = "red")) +
+    theme_minimal() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))  # Rotate x-axis labels if necessary
+  
+  # Print the plot
+  print(p)
+}
+
+```
+
+
+```{r}
+#Seperate Graph for BMI
+p_bmi <- ggplot(x, aes(x = BMI, fill = Diagnosis)) +
+  geom_histogram(position = "fill", color = "black", bins = 20) +
+  labs(title = "Comparison of BMI vs. Diagnosis",
+       x = "BMI", y = "Proportion of Cancer") +
+  scale_fill_manual(values = c("No Cancer" = "blue", "Cancer" = "red")) +
+  theme_minimal()
+
+print(p_bmi)
+```
+
+```{r}
+#Seperate Graph for Physical Activity
+p_activity <- ggplot(x, aes(x = PhysicalActivity, fill = Diagnosis)) +
+  geom_density(alpha = 0.5) +
+  labs(title = "Comparison of Physical Activity vs. Diagnosis",
+       x = "Physical Activity", y = "Density") +
+  scale_fill_manual(values = c("No Cancer" = "blue", "Cancer" = "red")) +
+  theme_minimal()
+
+print(p_activity)
+```
